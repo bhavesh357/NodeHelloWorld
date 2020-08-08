@@ -1,6 +1,22 @@
 const express = require('express');
 const bodyParser= require('body-parser');
 
+//db config
+
+const dbConfig= require('./config/database.config');
+const mongoose = require('mongoose');
+
+mongoose.Promise = global.Promise;
+
+mongoose.connect(dbConfig.url, {
+    useNewUrlParser: true
+}).then( () => {
+    console.log("Successfully Connected to batabase");
+}).catch( err => {
+    console.log('Could not connect to the database. Exiting now...', err);
+    process.exit();
+})
+
 const app= express();
 app.use(bodyParser.urlencoded({ extended: true }))
 
