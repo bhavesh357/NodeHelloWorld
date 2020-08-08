@@ -28,7 +28,7 @@ exports.findAll = (req,res) => {
 };
 
 exports.findOne = (req,res) => {
-    Hello.findById(req.params.noteId)
+    Hello.findById(req.params.helloId)
     .then( hello => {
         if(!hello){
             return res.status(404).send({
@@ -64,7 +64,7 @@ exports.update = (req,res) => {
                 message: "Hello not found with id " + req.params.helloId
             });
         }
-        res.send(note);
+        res.send(hello);
     }).catch( err => {
         if(err.kind==='ObjectId') {
             return res.status(404).send({
@@ -78,9 +78,9 @@ exports.update = (req,res) => {
 };
 
 exports.delete = (req,res) => {
-    Hello.findByIdAndRemove(req.params.noteId)
+    Hello.findByIdAndRemove(req.params.helloId)
     .then(hello => {
-        if(!note) {
+        if(!hello) {
             return res.status(404).send({
                 message: "Hello not found with id " + req.params.helloId
             });
