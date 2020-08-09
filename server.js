@@ -1,36 +1,34 @@
+/* eslint-disable linebreak-style */
 const express = require('express');
 const bodyParser= require('body-parser');
 
-
-
-//db config
-
+// db config
 const dbConfig= require('./config/database.config');
 const mongoose = require('mongoose');
 
 mongoose.Promise = global.Promise;
 
 mongoose.connect(dbConfig.url, {
-    useNewUrlParser: true
+    useNewUrlParser: true,
 }).then( () => {
-    console.log("Successfully Connected to batabase");
-}).catch( err => {
+    console.log('Successfully Connected to batabase');
+}).catch( (err) => {
     console.log('Could not connect to the database. Exiting now...', err);
     process.exit();
-})
+});
 
 const app= express();
-app.use(bodyParser.urlencoded({ extended: true }))
+app.use(bodyParser.urlencoded({extended: true}));
 
-app.use(bodyParser.json())
+app.use(bodyParser.json());
 
-app.get('/',(req,res) => {
-    res.json({"message":"Hello World"});
+app.get('/', (req, res) => {
+    res.json({'message': 'Hello World'});
 });
 
 
 require('./routes/hello.routes')(app);
 
 app.listen(3000, ()=>{
-    console.log("Server is listening on port 3000");
+    console.log('Server is listening on port 3000');
 });
