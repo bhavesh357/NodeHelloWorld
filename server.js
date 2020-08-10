@@ -17,7 +17,7 @@ mongoose.connect(dbConfig.url, {
     process.exit();
 });
 
-const app= express();
+module.exports = app= express();
 app.use(bodyParser.urlencoded({extended: true}));
 
 app.use(bodyParser.json());
@@ -32,3 +32,4 @@ require('./routes/hello.routes')(app);
 app.listen(3000, ()=>{
     console.log('Server is listening on port 3000');
 });
+
